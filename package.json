@@ -1,0 +1,30 @@
+{
+  "name": "communication-style-assessment",
+  "version": "1.0.0",
+  "description": "A multilingual web application for assessing communication styles based on the Douglas & Douglas (1992) framework",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "build": "echo 'No build required for static HTML application'",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": [
+    "communication",
+    "personality",
+    "assessment",
+    "multilingual",
+    "i18n"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {},
+  "homepage": "https://github.com/yourusername/communication-style-assessment",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/communication-style-assessment.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/communication-style-assessment/issues"
+  }
+}

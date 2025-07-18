@@ -1,0 +1,1700 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Communication Style Assessment</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f5f5f5;
+            }
+
+            .container {
+                background-color: white;
+                padding: 30px;
+                margin: 70px 20px 20px 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                max-width: 1200px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            h1 {
+                color: #333;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .question {
+                margin-bottom: 25px;
+                padding: 20px;
+                background-color: #f9f9f9;
+                border-radius: 8px;
+                border-left: 4px solid #4caf50;
+            }
+
+            .question h3 {
+                margin-top: 0;
+                color: #333;
+            }
+
+            .options {
+                margin-top: 15px;
+            }
+
+            .option {
+                margin: 10px 0;
+                padding: 10px;
+                background-color: white;
+                border-radius: 5px;
+                border: 1px solid #ddd;
+                transition: background-color 0.3s;
+            }
+
+            .option:hover {
+                background-color: #e8f5e8;
+            }
+
+            .option input[type="radio"] {
+                margin-right: 10px;
+            }
+
+            .option label {
+                cursor: pointer;
+                display: block;
+                width: 100%;
+            }
+
+            .submit-btn {
+                background-color: #4caf50;
+                color: white;
+                padding: 15px 30px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                display: block;
+                margin: 30px auto;
+                transition: background-color 0.3s;
+            }
+
+            .submit-btn:hover {
+                background-color: #45a049;
+            }
+
+            .results {
+                display: none;
+                margin-top: 30px;
+                padding: 20px;
+                background-color: #f9f9f9;
+                border-radius: 8px;
+                border: 2px solid #ddd;
+            }
+
+            .results h2 {
+                color: #333;
+                margin-top: 0;
+            }
+
+            .color-results {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+                margin-top: 20px;
+            }
+
+            .color-card {
+                padding: 15px;
+                border-radius: 8px;
+                text-align: center;
+                color: white;
+                font-weight: bold;
+            }
+
+            .blue-card {
+                background-color: #2196f3;
+            }
+            .red-card {
+                background-color: #f44336;
+            }
+            .yellow-card {
+                background-color: #ff9800;
+            }
+            .green-card {
+                background-color: #4caf50;
+            }
+
+            .primary-style {
+                margin-top: 20px;
+                padding: 15px;
+                background-color: #fff3cd;
+                border: 2px solid #ffc107;
+                border-radius: 8px;
+                text-align: center;
+            }
+
+            .primary-style h3 {
+                color: #856404;
+                margin-top: 0;
+            }
+
+            .instructions {
+                background-color: #e8f4fd;
+                padding: 15px;
+                border-radius: 8px;
+                margin-bottom: 30px;
+                border-left: 4px solid #2196f3;
+            }
+
+            .footer {
+                text-align: center;
+                margin-top: 30px;
+                padding-top: 20px;
+                border-top: 1px solid #ddd;
+                color: #666;
+                font-size: 14px;
+            }
+
+            .main-nav {
+                display: flex;
+                background-color: #333;
+                margin-bottom: 0;
+                justify-content: center;
+                flex-wrap: wrap;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 1000;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            }
+
+            .main-nav-button {
+                padding: 15px 20px;
+                border: none;
+                background-color: transparent;
+                color: white;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background-color 0.3s;
+                flex: 1;
+                min-width: 140px;
+                text-align: center;
+            }
+
+            .main-nav-button:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .main-nav-button.active {
+                background-color: #666;
+            }
+
+            .language-selector {
+                padding: 10px 20px;
+                display: flex;
+                align-items: center;
+            }
+
+            .language-selector select {
+                background-color: #555;
+                color: white;
+                border: 1px solid #777;
+                padding: 8px 12px;
+                border-radius: 4px;
+                font-size: 14px;
+                cursor: pointer;
+            }
+
+            .language-selector select:hover {
+                background-color: #666;
+            }
+
+            .main-tab-content {
+                display: none;
+                background-color: white;
+                min-height: 80vh;
+                padding: 30px;
+            }
+
+            .main-tab-content.active {
+                display: block;
+            }
+
+            .overview-content h2 {
+                color: #333;
+                margin-bottom: 20px;
+            }
+
+            .start-quiz-btn {
+                background-color: #4caf50;
+                color: white;
+                padding: 15px 30px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                margin-top: 20px;
+                transition: background-color 0.3s;
+            }
+
+            .start-quiz-btn:hover {
+                background-color: #45a049;
+            }
+
+            .style-tab-content h2 {
+                margin-top: 0;
+                color: #333;
+            }
+
+            .style-tab-content h3 {
+                color: #333;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+
+            .style-tab-content ul {
+                margin: 10px 0;
+                padding-left: 20px;
+            }
+
+            .style-tab-content li {
+                margin: 8px 0;
+            }
+
+            .quadrant-results {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                gap: 2px;
+                max-width: 600px;
+                margin: 20px auto;
+                border: 3px solid #333;
+                border-radius: 10px;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .quadrant {
+                padding: 15px;
+                color: white;
+                font-weight: normal;
+                font-size: 18px;
+                display: flex;
+                flex-direction: column;
+                min-height: 180px;
+                position: relative;
+            }
+
+            .quadrant-green {
+                background-color: #4caf50;
+            }
+            .quadrant-blue {
+                background-color: #2196f3;
+            }
+            .quadrant-yellow {
+                background-color: #ff9800;
+            }
+            .quadrant-red {
+                background-color: #f44336;
+            }
+
+            .quadrant-score {
+                font-size: 48px;
+                font-weight: bold;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .quadrant-label {
+                font-size: 14px;
+                font-weight: bold;
+                opacity: 0.9;
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                line-height: 1.2;
+                white-space: nowrap;
+            }
+
+            .quadrant-info {
+                position: absolute;
+                bottom: 15px;
+                left: 15px;
+                right: 15px;
+                font-size: 11px;
+                line-height: 1.3;
+                text-align: left;
+            }
+
+            .axis-labels {
+                position: relative;
+                max-width: 700px;
+                margin: 60px auto;
+                padding: 40px;
+            }
+
+            .axis-label {
+                position: absolute;
+                font-weight: bold;
+                color: #333;
+                font-size: 14px;
+                background-color: rgba(255, 255, 255, 0.9);
+                padding: 8px 15px;
+                border-radius: 20px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                z-index: 10;
+                border: 2px solid #ddd;
+            }
+
+            .axis-top {
+                top: -45px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .axis-bottom {
+                bottom: -45px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .axis-left {
+                left: -120px;
+                top: 50%;
+                transform: translateY(-50%) rotate(-90deg);
+                white-space: nowrap;
+            }
+
+            .axis-right {
+                right: -120px;
+                top: 50%;
+                transform: translateY(-50%) rotate(90deg);
+                white-space: nowrap;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main-nav">
+            <button
+                class="main-nav-button active"
+                id="overview-nav"
+                onclick="showMainTab('overview')"
+                data-translate="overview"
+            >
+                Overview
+            </button>
+            <button
+                class="main-nav-button"
+                id="assessment-nav"
+                onclick="showMainTab('assessment')"
+                data-translate="assessment"
+            >
+                Assessment
+            </button>
+            <button
+                class="main-nav-button"
+                id="blue-nav"
+                onclick="showMainTab('blue')"
+                data-translate="blueDirect"
+            >
+                Blue/Direct
+            </button>
+            <button
+                class="main-nav-button"
+                id="red-nav"
+                onclick="showMainTab('red')"
+                data-translate="redSpirited"
+            >
+                Red/Spirited
+            </button>
+            <button
+                class="main-nav-button"
+                id="yellow-nav"
+                onclick="showMainTab('yellow')"
+                data-translate="yellowConsiderate"
+            >
+                Yellow/Considerate
+            </button>
+            <button
+                class="main-nav-button"
+                id="green-nav"
+                onclick="showMainTab('green')"
+                data-translate="greenSystematic"
+            >
+                Green/Systematic
+            </button>
+            <div class="language-selector">
+                <select id="languageSelect">
+                    <option value="en">English</option>
+                    <option value="zh">中文</option>
+                    <option value="pt">Português</option>
+                    <option value="vi">Tiếng Việt</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Overview Tab -->
+            <div
+                class="main-tab-content overview-content active"
+                id="overview-tab"
+            >
+                <h1 data-translate="mainTitle">Communication Style Assessment</h1>
+                <h2 data-translate="overviewSubtitle">Understanding Self and Working with Others</h2>
+                <h3 data-translate="overviewSubtitle2">Personality Styles Questionnaire</h3>
+
+                <p data-translate="overviewPara1">
+                    Each of us develops our own unique style that works for us.
+                    As children, we tried out different behaviours and kept the
+                    ones that got us the results we thought we wanted. Even now,
+                    if we appreciate certain behaviour in others, we may
+                    incorporate it into our own style.
+                </p>
+
+                <p data-translate="overviewPara2">
+                    When you ask people to identify the major cause of most
+                    distractions, interruptions, and irritations at work, they
+                    respond: 'people'. Since none of us can work in solitude and
+                    most of us don't even have a door to close, it is important
+                    that we learn how people work and how we can better work
+                    with them. We also need to know how we work and how our
+                    personal work styles affect both our productivity and
+                    effectiveness, and that of others.
+                </p>
+
+                <p data-translate="overviewPara3">
+                    We feel stress and experience frustration when we don't
+                    understand why people act the way they do and when they act
+                    in ways that don't support us. Understanding personal styles
+                    can give you insight into your own way of working and that
+                    of others so you can improve communication and decrease
+                    conflicts on and off the job.
+                </p>
+
+                <div
+                    style="
+                        background-color: #e8f4fd;
+                        padding: 20px;
+                        border-radius: 8px;
+                        margin: 20px 0 30px 0;
+                        border: 2px solid #2196f3;
+                    "
+                >
+                    <h4 style="color: #1976d2; margin-top: 0; margin-bottom: 0" data-translate="overviewQuote">
+                        Understanding leads to tolerance, which in turn leads to
+                        acceptance.
+                    </h4>
+                </div>
+
+                <h4 data-translate="cautionTitle">A note of caution</h4>
+                <p data-translate="cautionText">
+                    We discuss style in order to help you understand why
+                    different people adopt change and why others have trouble
+                    coping with change. The more you understand, the better
+                    you'll get along with others and the better you'll work well
+                    with them too.
+                </p>
+
+                <h4 data-translate="temptationsTitle">There are three temptations that we urge you to avoid:</h4>
+                <ol style="margin-left: 20px">
+                    <li>
+                        <strong data-translate="temptation1"
+                            >Don't use this information to browbeat or
+                            psychoanalyse others.</strong
+                        >
+                        <span data-translate="temptation1Text">This material will help you to understand yourself and
+                        others better, but it will not make you an expert on
+                        human behaviour. Don't get carried away with a little
+                        knowledge.</span>
+                    </li>
+                    <li>
+                        <strong data-translate="temptation2"
+                            >Don't try to categorise people and force them into
+                            a box.</strong
+                        >
+                        <span data-translate="temptation2Text">Our aim is to increase understanding, not to pigeonhole
+                        people. Style is a powerful factor in explaining
+                        behaviour, but it is still one factor.</span>
+                    </li>
+                    <li>
+                        <strong data-translate="temptation3"
+                            >Don't use style as an excuse for your own poor
+                            behaviour.</strong
+                        >
+                    </li>
+                </ol>
+
+                <button class="start-quiz-btn" onclick="startQuiz()" data-translate="startAssessmentBtn">
+                    Start Assessment
+                </button>
+            </div>
+
+            <!-- Assessment Tab -->
+            <div class="main-tab-content" id="assessment-tab">
+                <h1 data-translate="mainTitle">Communication Style Assessment</h1>
+                <div class="instructions">
+                    <p data-translate="assessmentInstructions">
+                        <strong>Instructions:</strong> From each of the
+                        following twelve sets of descriptive statements, select
+                        the statement that most closely describes you.
+                    </p>
+                </div>
+
+                <form id="quizForm">
+                    <div class="question">
+                        <h3><span data-translate="question1">1. I...</span></h3>
+                        <div class="options">
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q1" value="a" />
+                                    <span data-translate="q1a">adapt easily to others</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q1" value="b" />
+                                    <span data-translate="q1b">want my own way</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q1" value="c" />
+                                    <span data-translate="q1c">am fussy about my things</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q1" value="d" />
+                                    <span data-translate="q1d">like to have fun</span></label
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h3><span data-translate="question2">2. I...</span></h3>
+                        <div class="options">
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q2" value="a" />
+                                    <span data-translate="q2a">am always analysing things</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q2" value="b" />
+                                    <span data-translate="q2b">am generally undisciplined</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q2" value="c" />
+                                    <span data-translate="q2c">am fearful about what may happen</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q2" value="d" />
+                                    <span data-translate="q2d">get impatient with delays</span></label
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h3><span data-translate="question3">3. I...</span></h3>
+                        <div class="options">
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q3" value="a" />
+                                    <span data-translate="q3a">face the future optimistically</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q3" value="b" />
+                                    <span data-translate="q3b">enjoy an orderly life</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q3" value="c" />
+                                    <span data-translate="q3c">have a forceful personality</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q3" value="d" />
+                                    <span data-translate="q3d">am generally satisfied with life</span></label
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h3><span data-translate="question4">4. I...</span></h3>
+                        <div class="options">
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q4" value="a" />
+                                    <span data-translate="q4a">find things are usually in a haphazard condition</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q4" value="b" />
+                                    <span data-translate="q4b">am not very affectionate</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q4" value="c" />
+                                    <span data-translate="q4c">am generally very hard to please</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q4" value="d" />
+                                    <span data-translate="q4d">am timid and don't get involved much</span></label
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h3><span data-translate="question5">5. I...</span></h3>
+                        <div class="options">
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q5" value="a" />
+                                    <span data-translate="q5a">am decisive and action-oriented</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q5" value="b" />
+                                    <span data-translate="q5b">am considerate and respectful</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q5" value="c" />
+                                    <span data-translate="q5c">am demonstrative and animated</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q5" value="d" />
+                                    <span data-translate="q5d">have a sense of humour</span></label
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h3><span data-translate="question6">6. I...</span></h3>
+                        <div class="options">
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q6" value="a" />
+                                    <span data-translate="q6a">am a perfectionist in most things</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q6" value="b" />
+                                    <span data-translate="q6b">frequently talk too much</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q6" value="c" />
+                                    <span data-translate="q6c">tend to be intolerant</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q6" value="d" />
+                                    <span data-translate="q6d">am indifferent to many situations</span></label
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h3><span data-translate="question7">7. I...</span></h3>
+                        <div class="options">
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q7" value="a" />
+                                    <span data-translate="q7a">like being the centre of attention</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q7" value="b" />
+                                    <span data-translate="q7b">enjoy being in charge</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q7" value="c" />
+                                    <span data-translate="q7c">am a diplomatic peacemaker</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q7" value="d" />
+                                    <span data-translate="q7d">am critical of many situations</span></label
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h3><span data-translate="question8">8. I...</span></h3>
+                        <div class="options">
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q8" value="a" />
+                                    <span data-translate="q8a">am thoughtful and logical</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q8" value="b" />
+                                    <span data-translate="q8b">am often late</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q8" value="c" />
+                                    <span data-translate="q8c">like to take it easy</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q8" value="d" />
+                                    <span data-translate="q8d">have a temper that flares easily</span></label
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h3><span data-translate="question9">9. I...</span></h3>
+                        <div class="options">
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q9" value="a" />
+                                    <span data-translate="q9a">am cooperative and like to oblige friends and family</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q9" value="b" />
+                                    <span data-translate="q9b">get moody frequently</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q9" value="c" />
+                                    <span data-translate="q9c">enjoy being self-reliant</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q9" value="d" />
+                                    <span data-translate="q9d">like living spontaneously</span></label
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h3><span data-translate="question10">10. I...</span></h3>
+                        <div class="options">
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q10" value="a" />
+                                    <span data-translate="q10a">keep careful records</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q10" value="b" />
+                                    <span data-translate="q10b">want credit for what I achieve</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q10" value="c" />
+                                    <span data-translate="q10c">am often in doubt about what to do</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q10" value="d" />
+                                    <span data-translate="q10d">am strongly competitive</span></label
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h3><span data-translate="question11">11. I...</span></h3>
+                        <div class="options">
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q11" value="a" />
+                                    <span data-translate="q11a">produce a lot of work</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q11" value="b" />
+                                    <span data-translate="q11b">listen patiently to others</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q11" value="c" />
+                                    <span data-translate="q11c">am usually cheerful and lively</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q11" value="d" />
+                                    <span data-translate="q11d">am often pessimistic</span></label
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h3><span data-translate="question12">12. I...</span></h3>
+                        <div class="options">
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q12" value="a" />
+                                    <span data-translate="q12a">tend to overlook details or to forget things</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q12" value="b" />
+                                    <span data-translate="q12b">am slow to get moving</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q12" value="c" />
+                                    <span data-translate="q12c">am stubborn in my opinions</span></label
+                                >
+                            </div>
+                            <div class="option">
+                                <label
+                                    ><input type="radio" name="q12" value="d" />
+                                    <span data-translate="q12d">plan to organise things well</span></label
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" data-translate="calculateBtn">
+                        Calculate My Communication Style
+                    </button>
+                </form>
+
+                <div id="results" class="results">
+                    <h2 data-translate="resultsTitle">Your Communication Style Results</h2>
+
+                    <div class="axis-labels">
+                        <div class="axis-label axis-top" id="taskOrientedLabel" data-translate="taskOriented">
+                            Task Oriented
+                        </div>
+                        <div
+                            class="axis-label axis-bottom"
+                            id="peopleOrientedLabel"
+                            data-translate="peopleOriented"
+                        >
+                            People Oriented
+                        </div>
+                        <div class="axis-label axis-left" id="steadyPaceLabel" data-translate="steadyPace">
+                            Pace = Steady/Controlled
+                        </div>
+                        <div class="axis-label axis-right" id="fastPaceLabel" data-translate="fastPace">
+                            Pace = Fast/Multiple
+                        </div>
+
+                        <div class="quadrant-results">
+                            <div class="quadrant quadrant-green">
+                                <div class="quadrant-label" data-translate="greenLabel">
+                                    Green/Systematic
+                                </div>
+                                <div class="quadrant-score" id="greenScore">
+                                    0
+                                </div>
+                                <div class="quadrant-info">
+                                    <span data-translate="greenDesc">Less assertiveness and less responsiveness</span><br />
+                                    <strong data-translate="greenSeenAs">Seen as:</strong> The thought person<br />
+                                    <strong data-translate="greenNeed">Need:</strong> Have to get the task right
+                                </div>
+                            </div>
+                            <div class="quadrant quadrant-blue">
+                                <div class="quadrant-label" data-translate="blueLabel">Blue/Direct</div>
+                                <div class="quadrant-score" id="blueScore">
+                                    0
+                                </div>
+                                <div class="quadrant-info">
+                                    <span data-translate="blueDesc">More assertiveness and less responsiveness</span><br />
+                                    <strong data-translate="blueSeenAs">Seen as:</strong> The action person<br />
+                                    <strong data-translate="blueNeed">Need:</strong> Have to get the task done
+                                </div>
+                            </div>
+                            <div class="quadrant quadrant-yellow">
+                                <div class="quadrant-label" data-translate="yellowLabel">
+                                    Yellow/Considerate
+                                </div>
+                                <div class="quadrant-score" id="yellowScore">
+                                    0
+                                </div>
+                                <div class="quadrant-info">
+                                    <span data-translate="yellowDesc">Less assertiveness and more responsiveness</span><br />
+                                    <strong data-translate="yellowSeenAs">Seen as:</strong> The people person<br />
+                                    <strong data-translate="yellowNeed">Need:</strong> Have to get along with others
+                                </div>
+                            </div>
+                            <div class="quadrant quadrant-red">
+                                <div class="quadrant-label" data-translate="redLabel">Red/Spirited</div>
+                                <div class="quadrant-score" id="redScore">
+                                    0
+                                </div>
+                                <div class="quadrant-info">
+                                    <span data-translate="redDesc">More assertiveness and more responsiveness</span><br />
+                                    <strong data-translate="redSeenAs">Seen as:</strong> The front person<br />
+                                    <strong data-translate="redNeed">Need:</strong> Have to be appreciated by others
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="primaryStyleDisplay">
+                        <!-- Primary style will be shown here -->
+                    </div>
+
+                    <div class="primary-style">
+                        <p data-translate="resultsNote">
+                            <strong>Note:</strong> Each person is a blend of all
+                            four styles. No one is 100% in any one style. No
+                            style is better or worse than any other - each has
+                            its own unique blend of strengths and potential
+                            weaknesses.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blue/Direct Tab -->
+            <div class="main-tab-content style-tab-content" id="blue-tab">
+                <h2 data-translate="blueTitle">Blue/Direct</h2>
+
+                <h3 data-translate="blueCharacteristics">Key Characteristics:</h3>
+                <ul>
+                    <li data-translate="blueChar1">
+                        They enjoy looking at the 'big picture', being in
+                        charge, and are comfortable taking risks.
+                    </li>
+                    <li data-translate="blueChar2">
+                        They are goal-oriented, enjoy getting immediate results
+                        and accepting challenges, and like to have their fingers
+                        in many pies.
+                    </li>
+                    <li data-translate="blueChar3">
+                        They enjoy making quick decisions and questioning the
+                        status quo.
+                    </li>
+                    <li data-translate="blueChar4">
+                        Blues are take-charge people, whether they're two years
+                        old or 52
+                    </li>
+                    <li data-translate="blueChar5">
+                        They are frequently 'the boss' because they seek
+                        supervisory positions.
+                    </li>
+                    <li data-translate="blueChar6">
+                        Even if they are not in charge, they often take charge
+                        anyway.
+                    </li>
+                    <li data-translate="blueChar7">
+                        They thrive on opposition and love to solve problems.
+                    </li>
+                    <li data-translate="blueChar8">
+                        They will fight hard for what they believe is right but
+                        can accept momentary defeat without holding grudges.
+                    </li>
+                    <li data-translate="blueChar9">
+                        They're self-starters, direct, positive, and
+                        straightforward. That's their nice side.
+                    </li>
+                    <li data-translate="blueChar10">
+                        They thrive on competition, tough assignments, heavy
+                        workloads, pressure, and any opportunity for
+                        achievement.
+                    </li>
+                    <li data-translate="blueChar11">They demand a great deal of themselves and others.</li>
+                    <li data-translate="blueChar12">
+                        Their energy level is high, and they can exercise strong
+                        willpower when it helps them to reach their goals.
+                    </li>
+                    <li data-translate="blueChar13">
+                        Blues feel secure when they are in control, and much of
+                        their behaviour is directed to staying in control.
+                    </li>
+                    <li data-translate="blueChar14">They like to see results from their efforts.</li>
+                    <li data-translate="blueChar15">They create change to gain control.</li>
+                </ul>
+
+                <p data-translate="blueMotivation">
+                    They are motivated by challenge, competition and solving
+                    problems. They like working in an environment that includes
+                    opportunity for individual accomplishments, a wide scope of
+                    operations and many new and varied activities. They measure
+                    personal worth by results, 'track record', and measurable
+                    progress.
+                </p>
+
+                <h3 data-translate="blueDevelopment">Areas for development:</h3>
+                <div>
+                    <p data-translate="blueDev1">
+                        They are too blunt for their own good and are often
+                        organisational troublemakers.
+                    </p>
+                    <p data-translate="blueDev2">
+                        As they single-mindedly pursue the goal, they often hurt
+                        the feelings of others without even realising it.
+                    </p>
+                    <p data-translate="blueDev3">
+                        They flare up quickly and just as quickly cool down
+                        again.
+                    </p>
+                    <p data-translate="blueDev4">
+                        They often hate routine and are prone to changing jobs,
+                        especially early in their careers.
+                    </p>
+                    <p data-translate="blueDev5">Inefficiency and indecision irritate them.</p>
+                    <p
+                        style="
+                            background-color: #ffebee;
+                            padding: 10px;
+                            border-left: 4px solid #f44336;
+                            margin: 10px 0;
+                        "
+                    >
+                        <strong data-translate="blueUnderPressure">Under pressure:</strong> <span data-translate="blueUnderPressureDesc">Blues can become bossy,
+                        impatient, blunt, sarcastic, and critical.</span>
+                    </p>
+                </div>
+
+                <div
+                    style="
+                        background-color: #e3f2fd;
+                        padding: 20px;
+                        border-radius: 8px;
+                        border: 2px solid #2196f3;
+                        text-align: center;
+                        margin-top: 30px;
+                    "
+                >
+                    <h3 style="color: #1976d2; margin: 0; font-size: 24px">
+                        <strong data-translate="blueAim">Basic Aim: Get it done</strong>
+                    </h3>
+                </div>
+            </div>
+
+            <!-- Red/Spirited Tab -->
+            <div class="main-tab-content style-tab-content" id="red-tab">
+                <h2 data-translate="redTitle">Red/Spirited</h2>
+
+                <h3 data-translate="redCharacteristics">Key Characteristics:</h3>
+                <ul>
+                    <li data-translate="redChar1">
+                        Reds are happiest when they are influencing or
+                        entertaining other people.
+                    </li>
+                    <li data-translate="redChar2">
+                        They, like the Blues are comfortable taking risks and
+                        enjoy trying new things.
+                    </li>
+                    <li data-translate="redChar3">
+                        They are the charming, playful, spontaneous, talkative
+                        types who are energised by being the centre of
+                        attention. They're inspirational, creative, helpful, and
+                        articulate.
+                    </li>
+                    <li data-translate="redChar4">
+                        The Red person usually has a pleasing personality and a
+                        good sense of humour.
+                    </li>
+                    <li data-translate="redChar5">They persuade where the Blue person coerces.</li>
+                    <li data-translate="redChar6">
+                        People seem to respond naturally to them, and they make
+                        friends easily.
+                    </li>
+                    <li data-translate="redChar7">
+                        They are innately optimistic and their natural people
+                        skills help them to get along with almost anyone,
+                        including their competitors.
+                    </li>
+                    <li data-translate="redChar8">
+                        They enjoy interacting with other people and can't stand
+                        being cooped up by themselves.
+                    </li>
+                    <li data-translate="redChar9">
+                        They love recognition. They are expressive, confident,
+                        poised, and friendly.
+                    </li>
+                    <li data-translate="redChar10">
+                        They thrive on social contact, one-on-one situations and
+                        freedom from controls or details.
+                    </li>
+                    <li data-translate="redChar11">
+                        They are spontaneous, loosely disciplined and dislike
+                        structure.
+                    </li>
+                    <li data-translate="redChar12">
+                        They can handle ambiguity well and enjoy change and
+                        variety.
+                    </li>
+                    <li data-translate="redChar13">
+                        They are energetic, although they can dissipate their
+                        energy by going in too many directions.
+                    </li>
+                    <li data-translate="redChar14">Reds tend to operate in the present.</li>
+                    <li data-translate="redChar15">
+                        Reds feel secure when they receive lots of positive
+                        encouragement and praise from others.
+                    </li>
+                    <li data-translate="redChar16">They promote change because it provides variety.</li>
+                    <li data-translate="redChar17">
+                        They will go to great lengths to gain approval from
+                        those who are important to them.
+                    </li>
+                </ul>
+
+                <p data-translate="redMotivation">
+                    They are motivated by recognition-they want to be liked.
+                    They enjoy an environment that includes: freedom of
+                    expression; opportunities to verbalise ideas; and coaching
+                    and counselling others. They measure personal worth by
+                    recognition, applause, and compliments.
+                </p>
+
+                <h3 data-translate="redDevelopment">Areas for development:</h3>
+                <div>
+                    <p data-translate="redDev1">
+                        They don't like to pay too much attention to time,
+                        because time imposes structure.
+                    </p>
+                    <p data-translate="redDev2">
+                        As a result, they are often late, but they are also
+                        tolerant when others are tardy.
+                    </p>
+                    <p data-translate="redDev3">
+                        To a Red, relationships are more important than
+                        promptness.
+                    </p>
+                    <p data-translate="redDev4">
+                        If left to their own devices, extreme Red types may turn
+                        the team into a social club, and although it may be fun,
+                        very little work will get done.
+                    </p>
+                    <p data-translate="redDev5">
+                        They get bored if they have to do the same old thing all
+                        the time.
+                    </p>
+                    <p data-translate="redDev6">
+                        They are bored by details and often fail to follow
+                        through on things as they should.
+                    </p>
+                    <p data-translate="redDev7">Boredom, routine, and structure irritate them.</p>
+                    <p
+                        style="
+                            background-color: #ffebee;
+                            padding: 10px;
+                            border-left: 4px solid #f44336;
+                            margin: 10px 0;
+                        "
+                    >
+                        <strong data-translate="redUnderPressure">Under pressure:</strong> <span data-translate="redUnderPressureDesc">Reds can become
+                        impulsive, emotional, inconsistent, superficial, and
+                        unrealistic.</span>
+                    </p>
+                </div>
+
+                <div
+                    style="
+                        background-color: #ffebee;
+                        padding: 20px;
+                        border-radius: 8px;
+                        border: 2px solid #f44336;
+                        text-align: center;
+                        margin-top: 30px;
+                    "
+                >
+                    <h3 style="color: #d32f2f; margin: 0; font-size: 24px">
+                        <strong data-translate="redAim">Basic Aim: Have Fun</strong>
+                    </h3>
+                </div>
+            </div>
+
+            <!-- Yellow/Considerate Tab -->
+            <div class="main-tab-content style-tab-content" id="yellow-tab">
+                <h2 data-translate="yellowTitle">Yellow/Considerate</h2>
+
+                <h3 data-translate="yellowCharacteristics">Key Characteristics:</h3>
+                <ul>
+                    <li data-translate="yellowChar1">
+                        They tend to be most concerned with the needs of others.
+                    </li>
+                    <li data-translate="yellowChar2">
+                        They are the best team builders, highly empathetic and
+                        sensitive to the needs of others, always listening to,
+                        encouraging, and bringing out the best in others.
+                    </li>
+                    <li data-translate="yellowChar3">
+                        Yellows are steady, amiable, relaxed, easy-going people.
+                    </li>
+                    <li data-translate="yellowChar4">
+                        They identify strongly with groups and do not usually
+                        seek the spotlight for themselves.
+                    </li>
+                    <li data-translate="yellowChar5">They probably adapt best to the ideas of teamwork.</li>
+                    <li data-translate="yellowChar6">They are practical, factual, and low-key.</li>
+                    <li data-translate="yellowChar7">
+                        They don't pretend to be something they are not: what
+                        you see is what you get.
+                    </li>
+                    <li data-translate="yellowChar8">
+                        They are generally content with the status quo and are
+                        slow to change.
+                    </li>
+                    <li data-translate="yellowChar9">They resist pressure and attempt to avoid conflict.</li>
+                    <li data-translate="yellowChar10">
+                        They thrive in a relaxed, supportive atmosphere where
+                        they receive lots of affirmation.
+                    </li>
+                    <li data-translate="yellowChar11">
+                        They prefer situations that offer security, limited
+                        territory, and predictable work routines.
+                    </li>
+                    <li data-translate="yellowChar12">They do best when they feel appreciated.</li>
+                    <li data-translate="yellowChar13">
+                        They are very oriented to personal relationships and
+                        seek to maintain harmony with others.
+                    </li>
+                    <li data-translate="yellowChar14">
+                        They are often the glue that holds a group together.
+                    </li>
+                    <li data-translate="yellowChar15">
+                        They are systematic, dependable, and patient; however,
+                        they can also be rather unexciting, unenthusiastic,
+                        slow, and stubborn.
+                    </li>
+                    <li data-translate="yellowChar16">
+                        Yellows feel secure when everything is in harmony and
+                        when they have lots of positive feedback from others.
+                    </li>
+                    <li data-translate="yellowChar17">
+                        They value security at work and at home more than most.
+                    </li>
+                </ul>
+
+                <p data-translate="yellowMotivation">
+                    They are motivated by appreciation for work done and have a
+                    strong need to please others. They enjoy an environment that
+                    includes sincere appreciation, identification with a group,
+                    and minimal conflict. They measure their own personal worth
+                    by the depth of their relationships and compatibility with
+                    others.
+                </p>
+
+                <h3 data-translate="yellowDevelopment">Areas for development:</h3>
+                <div>
+                    <p data-translate="yellowDev1">
+                        Like the Greens, they dislike confrontation and will
+                        give in to others to avoid conflict.
+                    </p>
+                    <p data-translate="yellowDev2">
+                        They can resist change because it upsets stable
+                        relationships and harmony.
+                    </p>
+                    <p data-translate="yellowDev3">Insensitivity and impatience irritate them.</p>
+                    <p
+                        style="
+                            background-color: #ffebee;
+                            padding: 10px;
+                            border-left: 4px solid #f44336;
+                            margin: 10px 0;
+                        "
+                    >
+                        <strong data-translate="yellowUnderPressure">Under pressure:</strong> <span data-translate="yellowUnderPressureDesc">Yellows become sulky,
+                        stubborn, and unimaginative; they can also hold grudges
+                        and procrastinate.</span>
+                    </p>
+                </div>
+
+                <div
+                    style="
+                        background-color: #fff8e1;
+                        padding: 20px;
+                        border-radius: 8px;
+                        border: 2px solid #ff9800;
+                        text-align: center;
+                        margin-top: 30px;
+                    "
+                >
+                    <h3 style="color: #f57c00; margin: 0; font-size: 24px">
+                        <strong data-translate="yellowAim">Basic Aim: Get along</strong>
+                    </h3>
+                </div>
+            </div>
+
+            <!-- Green/Systematic Tab -->
+            <div class="main-tab-content style-tab-content" id="green-tab">
+                <h2 data-translate="greenTitle">Green/Systematic</h2>
+
+                <h3 data-translate="greenCharacteristics">Key Characteristics:</h3>
+                <ul>
+                    <li data-translate="greenChar1">
+                        Greens are the most comfortable of all the styles where
+                        accuracy and numbers are important.
+                    </li>
+                    <li data-translate="greenChar2">Perfectionism is inherent in their style.</li>
+                    <li data-translate="greenChar3">
+                        "If a job's worth doing, it's worth doing right-the
+                        first time" might be their motto.
+                    </li>
+                    <li data-translate="greenChar4">
+                        They are thorough and are willing to take the time to
+                        get the job done right.
+                    </li>
+                    <li data-translate="greenChar5">
+                        They are the best of the four styles at critical
+                        thinking and planning.
+                    </li>
+                    <li data-translate="greenChar6">
+                        They are good at checking for accuracy, critically
+                        analysing performance and using a systematic approach to
+                        situations.
+                    </li>
+                    <li data-translate="greenChar7">
+                        They make the best administrators because they like
+                        order, structure, following guidelines and plans
+                        (especially if they originate them).
+                    </li>
+                    <li data-translate="greenChar8">
+                        Greens are precise, analytical, orderly, and cautious.
+                    </li>
+                    <li data-translate="greenChar9">
+                        They are attentive to details and make excellent
+                        planners, although they tend to get bogged down in
+                        analysis.
+                    </li>
+                    <li data-translate="greenChar10">
+                        Their tendency to pessimism helps them and others avoid
+                        potential problems.
+                    </li>
+                    <li data-translate="greenChar11">
+                        They hold to tradition and precedence and are slow to
+                        change.
+                    </li>
+                    <li data-translate="greenChar12">
+                        They are good at organising almost anything but are
+                        likely to prefer working alone rather than working as
+                        part of a team.
+                    </li>
+                    <li data-translate="greenChar13">They thrive in orderly, conflict-free situations.</li>
+                    <li data-translate="greenChar14">
+                        They enjoy exact job descriptions and dislike sudden
+                        surprises.
+                    </li>
+                    <li data-translate="greenChar15">They do their homework in depth.</li>
+                </ul>
+
+                <p data-translate="greenMotivation">
+                    Greens feel secure [motivated] when all their questions are
+                    answered and they are well prepared. They prefer a
+                    controlled work environment with the opportunity to produce
+                    high-quality, accurate work. They enjoy working in an
+                    environment where they have an opportunity to demonstrate
+                    expertise and gain recognition for specific skills and
+                    accomplishments. They measure personal worth by precision,
+                    accuracy, and thoroughness.
+                </p>
+
+                <h3 data-translate="greenDevelopment">Areas for development:</h3>
+                <div>
+                    <p data-translate="greenDev1">
+                        They resist change because it can threaten structure and
+                        order.
+                    </p>
+                    <p data-translate="greenDev2">
+                        Often, they are moody and easily depressed and see the
+                        negative side of things.
+                    </p>
+                    <p data-translate="greenDev3">
+                        Many have low energy levels and often get buried in
+                        details.
+                    </p>
+                    <p data-translate="greenDev4">
+                        They tend to set idealistic or unrealistic goals and
+                        feel overwhelmed about areas in which they don't measure
+                        up.
+                    </p>
+                    <p data-translate="greenDev5">Surprises and unpredictability irritate them.</p>
+                    <p
+                        style="
+                            background-color: #ffebee;
+                            padding: 10px;
+                            border-left: 4px solid #f44336;
+                            margin: 10px 0;
+                        "
+                    >
+                        <strong data-translate="greenUnderPressure">Under pressure:</strong> <span data-translate="greenUnderPressureDesc">Greens are overly
+                        critical, strict, resistant, perfectionist, and often
+                        can pass the buck to someone else.</span>
+                    </p>
+                </div>
+
+                <div
+                    style="
+                        background-color: #e8f5e8;
+                        padding: 20px;
+                        border-radius: 8px;
+                        border: 2px solid #4caf50;
+                        text-align: center;
+                        margin-top: 30px;
+                    "
+                >
+                    <h3 style="color: #388e3c; margin: 0; font-size: 24px">
+                        <strong data-translate="greenAim">Basic Aim: Get it right</strong>
+                    </h3>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p data-translate="footerAttribution">
+                    Based on the Douglas & Douglas (1992) Communication Style
+                    Assessment
+                </p>
+                <p data-translate="footerCopyright">Copyright © Preferred Training Networks 2025</p>
+            </div>
+        </div>
+
+        <script src="js/translations.js"></script>
+        <script>
+            // Scoring matrix based on the image
+            const scoringMatrix = {
+                1: { blue: "b", red: "d", yellow: "a", green: "c" },
+                2: { blue: "d", red: "b", yellow: "c", green: "a" },
+                3: { blue: "c", red: "a", yellow: "d", green: "b" },
+                4: { blue: "b", red: "a", yellow: "d", green: "c" },
+                5: { blue: "a", red: "c", yellow: "d", green: "b" },
+                6: { blue: "c", red: "b", yellow: "d", green: "a" },
+                7: { blue: "b", red: "a", yellow: "c", green: "d" },
+                8: { blue: "d", red: "b", yellow: "c", green: "a" },
+                9: { blue: "c", red: "d", yellow: "a", green: "b" },
+                10: { blue: "d", red: "b", yellow: "c", green: "a" },
+                11: { blue: "a", red: "c", yellow: "b", green: "d" },
+                12: { blue: "c", red: "a", yellow: "b", green: "d" },
+            };
+
+            const colorDescriptions = {
+                blue: {
+                    name: "Blue/Direct",
+                },
+                red: {
+                    name: "Red/Spirited",
+                },
+                yellow: {
+                    name: "Yellow/Considerate",
+                },
+                green: {
+                    name: "Green/Systematic",
+                },
+            };
+
+            document
+                .getElementById("quizForm")
+                .addEventListener("submit", function (e) {
+                    e.preventDefault();
+
+                    // Check if all questions are answered
+                    let allAnswered = true;
+                    for (let i = 1; i <= 12; i++) {
+                        const answer = document.querySelector(
+                            `input[name="q${i}"]:checked`,
+                        );
+                        if (!answer) {
+                            allAnswered = false;
+                            break;
+                        }
+                    }
+
+                    if (!allAnswered) {
+                        alert(t('answerAllQuestions'));
+                        return;
+                    }
+
+                    // Calculate scores
+                    const scores = { blue: 0, red: 0, yellow: 0, green: 0 };
+
+                    for (let i = 1; i <= 12; i++) {
+                        const answer = document.querySelector(
+                            `input[name="q${i}"]:checked`,
+                        ).value;
+
+                        // Check which color this answer corresponds to
+                        for (const [color, correctAnswer] of Object.entries(
+                            scoringMatrix[i],
+                        )) {
+                            if (answer === correctAnswer) {
+                                scores[color]++;
+                                break;
+                            }
+                        }
+                    }
+
+                    // Find primary style (highest score)
+                    let primaryStyle = "blue";
+                    let highestScore = scores.blue;
+
+                    for (const [color, score] of Object.entries(scores)) {
+                        if (score > highestScore) {
+                            highestScore = score;
+                            primaryStyle = color;
+                        }
+                    }
+
+                    // Display results
+                    displayResults(scores, primaryStyle);
+                });
+
+            function displayResults(scores, primaryStyle) {
+                const resultsDiv = document.getElementById("results");
+                const colorResultsDiv = document.getElementById("colorResults");
+
+                // Update quadrant scores
+                document.getElementById("greenScore").textContent =
+                    scores.green;
+                document.getElementById("blueScore").textContent = scores.blue;
+                document.getElementById("yellowScore").textContent =
+                    scores.yellow;
+                document.getElementById("redScore").textContent = scores.red;
+
+                // Calculate axis totals
+                const taskOriented = scores.green + scores.blue;
+                const peopleOriented = scores.yellow + scores.red;
+                const steadyPace = scores.green + scores.yellow;
+                const fastPace = scores.blue + scores.red;
+
+                // Update axis labels with counts
+                document.getElementById("taskOrientedLabel").textContent =
+                    `${t('taskOriented')} (${taskOriented})`;
+                document.getElementById("peopleOrientedLabel").textContent =
+                    `${t('peopleOriented')} (${peopleOriented})`;
+                document.getElementById("steadyPaceLabel").textContent =
+                    `${t('steadyPace')} (${steadyPace})`;
+                document.getElementById("fastPaceLabel").textContent =
+                    `${t('fastPace')} (${fastPace})`;
+
+                // Show primary style with color coding
+                const primaryStyleDisplay = document.getElementById(
+                    "primaryStyleDisplay",
+                );
+                const colorMap = {
+                    blue: { bg: "#e3f2fd", border: "#2196f3", text: "#1976d2" },
+                    red: { bg: "#ffebee", border: "#f44336", text: "#d32f2f" },
+                    yellow: {
+                        bg: "#fff8e1",
+                        border: "#ff9800",
+                        text: "#f57c00",
+                    },
+                    green: {
+                        bg: "#e8f5e8",
+                        border: "#4caf50",
+                        text: "#388e3c",
+                    },
+                };
+
+                const colors = colorMap[primaryStyle];
+                primaryStyleDisplay.innerHTML = `
+                    <div style="
+                        background-color: ${colors.bg};
+                        padding: 30px;
+                        border-radius: 12px;
+                        border: 3px solid ${colors.border};
+                        text-align: center;
+                        margin: 30px 0;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                    ">
+                        <p style="color: ${colors.text}; font-size: 18px; margin: 0 0 15px 0; font-weight: bold;">
+                            ${t('primaryStyleText')}
+                        </p>
+                        <h2 style="color: ${colors.text}; margin: 0; font-size: 32px; text-transform: uppercase; letter-spacing: 1px;">
+                            <strong>${t(primaryStyle + 'Label').toUpperCase()}</strong>
+                        </h2>
+                    </div>
+                `;
+
+                // Show results section
+                resultsDiv.style.display = "block";
+
+                // Scroll to results
+                resultsDiv.scrollIntoView({ behavior: "smooth" });
+            }
+
+            function startQuiz() {
+                showMainTab("assessment");
+            }
+
+            function showMainTab(tabName) {
+                // Hide all main tab contents
+                const mainTabContents =
+                    document.querySelectorAll(".main-tab-content");
+                mainTabContents.forEach((content) =>
+                    content.classList.remove("active"),
+                );
+
+                // Remove active class from all main nav buttons
+                const mainNavButtons =
+                    document.querySelectorAll(".main-nav-button");
+                mainNavButtons.forEach((button) =>
+                    button.classList.remove("active"),
+                );
+
+                // Show selected main tab content
+                document
+                    .getElementById(`${tabName}-tab`)
+                    .classList.add("active");
+
+                // Add active class to the correct nav button using ID
+                const activeButton = document.getElementById(`${tabName}-nav`);
+                if (activeButton) {
+                    activeButton.classList.add("active");
+                }
+
+                // Scroll to top of page
+                window.scrollTo(0, 0);
+            }
+        </script>
+    </body>
+</html>
