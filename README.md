@@ -4,7 +4,7 @@ A multilingual web application for assessing communication styles based on the D
 
 ## Features
 
-- **Multilingual Support**: Available in English, Chinese (Simplified), Portuguese, Vietnamese, and Hindi
+- **Multilingual Support**: Available in 10 languages including English, Chinese, Portuguese, Vietnamese, Hindi, French, German, Spanish, Japanese, and Russian
 - **Interactive Assessment**: 12-question personality style questionnaire
 - **Visual Results**: Color-coded quadrant system showing communication style preferences
 - **Educational Content**: Detailed descriptions of each communication style
@@ -54,6 +54,11 @@ communication-style-assessment/
 - **Portuguese** (pt) - Português
 - **Vietnamese** (vi) - Tiếng Việt
 - **Hindi** (hi) - हिन्दी
+- **French** (fr) - Français
+- **German** (de) - Deutsch
+- **Spanish** (es) - Español
+- **Japanese** (ja) - 日本語
+- **Russian** (ru) - Русский
 
 ## Technologies Used
 
